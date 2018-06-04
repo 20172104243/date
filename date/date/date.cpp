@@ -7,53 +7,46 @@ using namespace std;
 class CDate
 {
 private:
-	int month, day;
+	int year;
+	int month;
+	int day;
 public:
-	CDate()
-	{
-		month = 01;
-		day = 01;
-	}
-	CDate(int m, int d)
-	{
-		month = m;
-		day = d;
-	}
-	void setDate(int m, int d);
-	CDate operator +();
+    void setDate(int y,int m, int d);
 	void display();
 };
-void CDate::setDate(int m, int d)
+void CDate::setDate(int y,int m, int d)
 {
+	year = y;
 	month = m;
 	day = d;
-}
-CDate CDate::operator+()
-{
+	cout << year << "年" << month << "月" << day << "日" << endl;
 	if (month == 2)
 	{
-		if (day == 28)
+		if (year % 400 == 0 || year % 100 != 0 && year % 4 == 0)
 		{
-			month = month + 1;
-			day = 1;
+			if (day == 29)
+			{
+				month = month + 1;
+				day = 1;
+			}
+			else
+			{
+				month = month;
+				day = day + 1;
+			}
 		}
 		else
 		{
-			month = month;
-			day = day + 1;
-		}
-	}
-	else if(month==12)
-	{
-		if (day == 31)
-		{
-			month = 1;
-			day = 1;
-		}
-		else
-		{
-			month = month;
-			day = day + 1;
+			if (day == 28)
+			{
+				month = month + 1;
+				day = 1;
+			}
+			else
+			{
+				month = month;
+				day = day + 1;
+			}
 		}
 	}
 	else if ((month == 4) || (month == 6) || (month == 9) || (month == 11))
@@ -79,17 +72,22 @@ CDate CDate::operator+()
 		month = month;
 		day = day + 1;
 	}
-	return *this;
+	if (month == 12 && day == 31)
+	{
+		year = year + 1;
+		month = 1;
+		day = 1;
+	}
+
 }
 void CDate::display()
 {
-	cout << month << "" << day << endl;
+	cout <<"后一天"<< year << "年" << month << "月" << day << "日" << endl;
 }
-int mian()
+int main()
 {
 	CDate ot;
-	ot.setDate(6, 2);
-	ot.operator+();
+	ot.setDate(2017, 2, 28);
 	ot.display();
 	return 0;
 }
