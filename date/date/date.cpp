@@ -62,23 +62,18 @@ void CDate::setDate(int y,int m, int d)
 			day = day + 1;
 		}
 	}
-	else if (day == 31)
-	{
-		month = month + 1;
-		day = day + 1;
-	}
-	else
-	{
-		month = month;
-		day = day + 1;
-	}
-	if (month == 12 && day == 31)
+	else if (month == 12 && day == 31)
 	{
 		year = year + 1;
 		month = 1;
 		day = 1;
 	}
-
+	else if(month == 12 && day == 30)
+	{
+		year = year + 1;
+		month = 1;
+		day = 1;
+	}
 }
 void CDate::display()
 {
@@ -87,7 +82,7 @@ void CDate::display()
 int main()
 {
 	CDate ot;
-	ot.setDate(2017, 2, 28);
+	ot.setDate(2017,12,30);
 	ot.display();
 	return 0;
 }
