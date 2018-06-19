@@ -49,6 +49,19 @@ void CDate::setDate(int y,int m, int d)
 			}
 		}
 	}
+	else if (month == 12)
+	{
+		if (day == 31)
+		{
+			month = 1;
+			day = 1;
+		}
+		else
+		{
+			month = month;
+			day = day + 1;
+		}
+	}
 	else if ((month == 4) || (month == 6) || (month == 9) || (month == 11))
 	{
 		if (day == 30)
@@ -62,13 +75,17 @@ void CDate::setDate(int y,int m, int d)
 			day = day + 1;
 		}
 	}
-	else if (month == 12 && day == 31)
+	else   if (day == 31)
 	{
-		year = year + 1;
-		month = 1;
-		day = 1;
+		month = month + 1;
+		day = day + 1;
 	}
-	else if(month == 12 && day == 30)
+	else
+	{
+		month = month;
+		day = day + 1;
+	}
+	if (m == 12 && d == 31)
 	{
 		year = year + 1;
 		month = 1;
